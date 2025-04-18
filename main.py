@@ -2,6 +2,9 @@ import tkinter as tk
 import re
 from sympy import sympify # type: ignore
 
+# This is a simple calculator GUI using tkinter and sympy for expression evaluation.
+# Author: Viraj Rajurkar
+
 calculation = ""
 
 def addToCalculation(symbol):
