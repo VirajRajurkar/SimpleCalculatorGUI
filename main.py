@@ -5,23 +5,40 @@ from sympy import sympify # type: ignore
 calculation = ""
 
 def addToCalculation(symbol):
+    """
+    Adds the given symbol (number or operator) to the calculation string
+    and updates the text field to display the current calculation.
+    """
     global calculation
     calculation += str(symbol)
     text_result.delete(1.0, "end")
     text_result.insert(1.0, calculation)
 
 def evaluate_expression(expression):
+    """
+    Evaluates the given mathematical expression safely using sympy.
+    Ensures that only valid characters are allowed in the expression.
+    
+    Args:
+        expression (str): The mathematical expression to evaluate.
+    
+    Returns:
+        str: The result of the evaluation or an error message if invalid.
+    """
     # Allow only numbers, operators, and parentheses
     if not re.match(r'^[0-9+\-*/(). ]+$', expression):
         return "Invalid Input"
     try:
-        # Safely evaluate the expression
         result = sympify(expression)
         return result
     except Exception as e:
         return "Error"
 
 def evaluateCalculation():
+    """
+    Evaluates the current calculation string and displays the result
+    in the text field. Resets the calculation string after evaluation.
+    """
     global calculation
     result = evaluate_expression(calculation)
     text_result.delete(1.0, "end")
@@ -30,23 +47,25 @@ def evaluateCalculation():
 
 
 def clearField():
+    """
+    Clears the current calculation string and the text field. 
+    Basically the logic of the clear button.
+    """
     global calculation
     calculation = ""
     text_result.delete(1.0, "end")
     pass
 
-def clearField():
-    global calculation
-    calculation = ""
-    text_result.delete(1.0, "end")
-
+# Create the main window
 root = tk.Tk()
 root.geometry("490x250")
 root.title("Simple Calculator with GUI")
 
+# Set the size of the window and the title
 text_result = tk.Text(root, height=2, width=30, font=("Arial", 24))
 text_result.grid(columnspan=5)
 
+#Button definitions
 btn_1 = tk.Button(root, text = "1", command = lambda: addToCalculation(1), width = 10, font = ("Arial", 14))
 btn_1.grid(row = 2, column = 1)
 
@@ -101,5 +120,6 @@ btn_open_parenthesis.grid(row = 5, column = 1)
 btn_close_parenthesis = tk.Button(root, text = ")", command = lambda: addToCalculation(")"), width = 10, font = ("Arial", 14))
 btn_close_parenthesis.grid(row = 5, column = 3)
 
+# Run the main loop!
 root.mainloop()
 
