@@ -41,8 +41,8 @@ def clearField():
     text_result.delete(1.0, "end")
 
 root = tk.Tk()
-root.geometry("640x400")
-root.title("Calculator")
+root.geometry("490x250")
+root.title("Simple Calculator with GUI")
 
 text_result = tk.Text(root, height=2, width=30, font=("Arial", 24))
 text_result.grid(columnspan=5)
